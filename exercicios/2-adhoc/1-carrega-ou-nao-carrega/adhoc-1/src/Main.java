@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
  
 /**
  * IMPORTANT: 
@@ -14,18 +15,24 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         String entrada = scan.nextLine();
 
-        Integer[] entradaProcessada = conversor(entrada);
+        ArrayList<Integer> entradaProcessada = conversor(entrada);
 
         System.out.println(somadorBit(entradaProcessada));
         scan.close();
     }
 
-    static Integer[] conversor(String entrada){
-        Integer[] list = new List<Integer>();
-        return list;
+    /** Transforma a string de entrada em uma lista de inteiros, de
+     * forma que os números possam ser trabalhados.
+    */
+    static ArrayList<Integer> conversor(String entrada){
+        ArrayList<Integer> listInt = new ArrayList<Integer>();
+        String[] listStr = entrada.split(" ");
+        listInt.add(Integer.parseInt(listStr[0]));
+        listInt.add(Integer.parseInt(listStr[1]));
+        return listInt;
     }
     
-    static Integer somadorBit(Integer[] entrada){
+    static Integer somadorBit(ArrayList<Integer> entrada){
         return 0;
     }
  
