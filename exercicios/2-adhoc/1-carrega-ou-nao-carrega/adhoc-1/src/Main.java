@@ -3,21 +3,25 @@ import java.util.Scanner;
 import java.util.ArrayList;
  
 /**
- * IMPORTANT: 
- *      O nome da classe deve ser "Main" para que a sua solução execute
- *      Class name must be "Main" for your solution to execute
- *      El nombre de la clase debe ser "Main" para que su solución ejecutar
+ * 
  */
 public class Main {
  
     public static void main(String[] args) throws IOException {
- 
         Scanner scan = new Scanner(System.in);
-        String entrada = scan.nextLine();
+        String entrada;
 
-        ArrayList<Integer> entradaProcessada = conversor(entrada);
+        do{
+            entrada = scan.nextLine();
+            if (entrada.equals("EOF")) { break; }
 
-        System.out.println(somadorBit(entradaProcessada));
+            ArrayList<Integer> entradaProcessada = conversor(entrada);
+            Integer[] respostaBinaria = somadorBit(entradaProcessada);
+            Integer respostaFinal = conversorBinarioDecimal(respostaBinaria);
+
+            System.out.println(respostaFinal);
+        }while (true);
+
         scan.close();
     }
 
@@ -46,6 +50,7 @@ public class Main {
 
         int valor1Atual = entrada.get(0);
         int valor2Atual = entrada.get(1);
+
         for (int i = 0; i < 32; i++){
             resultadoBinario[i] = (valor1Atual % 2) ^ (valor2Atual % 2);
             valor1Atual = valor1Atual / 2;
@@ -56,11 +61,13 @@ public class Main {
     }
 
     static Integer conversorBinarioDecimal(Integer[] intBinario){
-        Integer numDecimal = 0;
+        double numDecimal = 0;
         
         for (int i = 0; i < 32; i++){
-            numDecimal = numDecimal + intBinario[i] * Math.pow(2, i);//Problema de conversao
+            numDecimal += intBinario[i] * Math.pow(2, i);
         }
+
+        return (int) numDecimal;
     }
  
 }
