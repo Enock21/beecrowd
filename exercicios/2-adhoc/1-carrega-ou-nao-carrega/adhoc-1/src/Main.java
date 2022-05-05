@@ -3,10 +3,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
  
 /**
- * 
+ * Este programa realiza uma adição entre dois números binários de 32 bits, porém com um erro específico: o bit de carry é sempre 0. Entradas e saídas são sempre em decimal.
  */
 public class Main {
  
+    /**
+     * Devem ser digitados 2 números inteiros no console, separados apenas por um espaço. O resultado é uma soma erronea, feita considerando que todos os bits de carry são iguais a 0.
+     */
     public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
         String entrada;
@@ -26,8 +29,10 @@ public class Main {
     }
 
     /**
-     * Transforma a string de entrada em uma lista de inteiros, de
-     * forma que os números possam ser trabalhados.
+     * Transforma a string de entrada em uma lista de inteiros, de forma que os números possam ser trabalhados.
+     * 
+     * @param entrada Esperam-se dois números inteiros separados por um espaço.
+     * @return Um ArrayList<Integer> contendo os números da entrada.
      */
     static ArrayList<Integer> conversor(String entrada){
         ArrayList<Integer> listInt = new ArrayList<Integer>();
@@ -41,9 +46,10 @@ public class Main {
     }
     
     /**
-     * Realiza soma bit a bit.
-     * @param entrada: 
-     * @return
+     * Converte os números de decimal para binário e realiza a soma bit a bit, considerando que todos os bits de carry são iguais a 0.
+     * 
+     * @param entrada Um ArrayList<Integer> com os dois números da entrada.
+     * @return O resultado da soma em binário no formato de um array de Integer com 32 posições.
      */
     static Integer[] somadorBit(ArrayList<Integer> entrada){
         Integer[] resultadoBinario = new Integer[32];
@@ -60,6 +66,12 @@ public class Main {
         return resultadoBinario;
     }
 
+    /**
+     * Converte um número binário em decimal.
+     * 
+     * @param intBinario Um número binário representado por um Integer[] de 32 posições.
+     * @return A representação decimal e inteira do número binário da entrada.
+     */
     static Integer conversorBinarioDecimal(Integer[] intBinario){
         double numDecimal = 0;
         
