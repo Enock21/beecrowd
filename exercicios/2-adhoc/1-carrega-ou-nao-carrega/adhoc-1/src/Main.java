@@ -8,9 +8,21 @@ import java.util.ArrayList;
 public class Main {
  
     /**
-     * Devem ser digitados 2 números inteiros no console, separados apenas por um espaço. O resultado é uma soma erronea, feita considerando que todos os bits de carry são iguais a 0.
+     * Devem ser digitados 2 números inteiros no console, separados apenas por um espaço. O resultado é uma soma errônea, feita considerando que todos os bits de carry são iguais a 0. O programa é encerrado quando o usuário digita EOF.
      */
     public static void main(String[] args) throws IOException {
+        /*
+        RUNTIME ERROR
+        
+        Exception in thread "main" java.lang.NumberFormatException: For input string: "4294967295"
+        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+        at java.base/java.lang.Integer.parseInt(Integer.java:652)
+        at java.base/java.lang.Integer.parseInt(Integer.java:770)
+        at Main.conversor(Main.java:42)
+        at Main.main(Main.java:21)
+        */
+
+
         Scanner scan = new Scanner(System.in);
         String entrada;
 
