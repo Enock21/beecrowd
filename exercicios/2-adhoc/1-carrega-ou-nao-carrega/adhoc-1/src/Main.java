@@ -11,28 +11,19 @@ public class Main {
      * Devem ser digitados 2 números inteiros no console, separados apenas por um espaço. O resultado é uma soma errônea, feita considerando que todos os bits de carry são iguais a 0. O programa é encerrado quando o usuário digita EOF.
      */
     public static void main(String[] args) throws IOException {
-        /*
-        RUNTIME ERROR
-        
-        Exception in thread "main" java.lang.NumberFormatException: For input string: "4294967295"
-        at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
-        at java.base/java.lang.Integer.parseInt(Integer.java:652)
-        at java.base/java.lang.Integer.parseInt(Integer.java:770)
-        at Main.conversor(Main.java:42)
-        at Main.main(Main.java:21)
-        */
-
-
         Scanner scan = new Scanner(System.in);
         String entrada;
 
         do{
-            entrada = scan.nextLine();
+            if (scan.hasNextLine()){
+                entrada = scan.nextLine();
+            } else { break; }
+
             if (entrada.equals("EOF")) { break; }
 
-            ArrayList<Integer> entradaProcessada = conversor(entrada);
+            ArrayList<Long> entradaProcessada = conversor(entrada);
             Integer[] respostaBinaria = somadorBit(entradaProcessada);
-            Integer respostaFinal = conversorBinarioDecimal(respostaBinaria);
+            Long respostaFinal = conversorBinarioDecimal(respostaBinaria);
 
             System.out.println(respostaFinal);
         }while (true);
@@ -41,36 +32,36 @@ public class Main {
     }
 
     /**
-     * Transforma a string de entrada em uma lista de inteiros, de forma que os números possam ser trabalhados.
+     * Transforma a string de entrada em uma lista de inteiros (Long), de forma que os números possam ser trabalhados.
      * 
-     * @param entrada Esperam-se dois números inteiros separados por um espaço.
-     * @return Um ArrayList<Integer> contendo os números da entrada.
+     * @param entrada Esperam-se dois números inteiros (Long) separados por um espaço.
+     * @return Um ArrayList<Long> contendo os números da entrada.
      */
-    static ArrayList<Integer> conversor(String entrada){
-        ArrayList<Integer> listInt = new ArrayList<Integer>();
+    static ArrayList<Long> conversor(String entrada){
+        ArrayList<Long> listLong = new ArrayList<Long>();
         String[] listStr = entrada.split(" ");
         
         for (int i = 0; i < listStr.length; i++){
-            listInt.add(Integer.parseInt(listStr[i]));
+            listLong.add(Long.parseLong(listStr[i]));
         }
 
-        return listInt;
+        return listLong;
     }
     
     /**
      * Converte os números de decimal para binário e realiza a soma bit a bit, considerando que todos os bits de carry são iguais a 0.
      * 
-     * @param entrada Um ArrayList<Integer> com os dois números da entrada.
+     * @param entrada Um ArrayList<Long> com os dois números da entrada.
      * @return O resultado da soma em binário no formato de um array de Integer com 32 posições.
      */
-    static Integer[] somadorBit(ArrayList<Integer> entrada){
+    static Integer[] somadorBit(ArrayList<Long> entrada){
         Integer[] resultadoBinario = new Integer[32];
 
-        int valor1Atual = entrada.get(0);
-        int valor2Atual = entrada.get(1);
+        Long valor1Atual = entrada.get(0);
+        Long valor2Atual = entrada.get(1);
 
         for (int i = 0; i < 32; i++){
-            resultadoBinario[i] = (valor1Atual % 2) ^ (valor2Atual % 2);
+            resultadoBinario[i] = (int) ((valor1Atual % 2) ^ (valor2Atual % 2));
             valor1Atual = valor1Atual / 2;
             valor2Atual = valor2Atual / 2;
         }
@@ -82,16 +73,16 @@ public class Main {
      * Converte um número binário em decimal.
      * 
      * @param intBinario Um número binário representado por um Integer[] de 32 posições.
-     * @return A representação decimal e inteira do número binário da entrada.
+     * @return A representação decimal e inteira (formato long) do número binário da entrada.
      */
-    static Integer conversorBinarioDecimal(Integer[] intBinario){
+    static Long conversorBinarioDecimal(Integer[] intBinario){
         double numDecimal = 0;
         
         for (int i = 0; i < 32; i++){
             numDecimal += intBinario[i] * Math.pow(2, i);
         }
 
-        return (int) numDecimal;
+        return (long) numDecimal;
     }
  
 }
