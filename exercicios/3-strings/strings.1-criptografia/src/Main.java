@@ -13,6 +13,10 @@ public class Main {
     static HashMap<Integer, Character> tabelaAscii = new HashMap<Integer, Character>();
  
     public static void main(String[] args) throws IOException {
+        Character ch = 'a';
+        System.out.println(Character.getNumericValue(ch));
+        
+        /*
         adcNaTabela();
 
         int numLinhas;
@@ -20,8 +24,13 @@ public class Main {
         numLinhas = scan.nextInt();
 
         for (int i = 0; i < numLinhas; i++){
-            
+            String texto = scan.nextLine();
+            String criptografia1 = primeiroProcessamento(texto);
+            System.out.println(criptografia1);
         }
+
+        scan.close();
+        */
 
     }
 
@@ -138,14 +147,16 @@ public class Main {
 
     public static String primeiroProcessamento(String texto){
         String retorno = "";
-
+        //65, 90
         for (int i = 0; i < texto.length(); i++){
             char charAtual = texto.charAt(i);
-            if (tabelaAscii.containsValue(charAtual) &&
-            tabelaAscii.){
-
+            int charAtualAscii = Character.getNumericValue(charAtual);
+            if (Character.isLetter(charAtual)){
+                retorno += Character.toChars(charAtualAscii + 3);
             }
         }
+
+        return retorno;
     }
  
 }
