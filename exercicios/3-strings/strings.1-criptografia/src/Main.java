@@ -3,34 +3,31 @@ import java.util.HashMap;
 import java.util.Scanner;
  
 /**
- * IMPORTANT: 
- *      O nome da classe deve ser "Main" para que a sua solução execute
- *      Class name must be "Main" for your solution to execute
- *      El nombre de la clase debe ser "Main" para que su solución ejecutar
+ *
  */
 public class Main {
-
     static HashMap<Integer, Character> tabelaAscii = new HashMap<Integer, Character>();
  
     public static void main(String[] args) throws IOException {
-        Character ch = 'a';
-        System.out.println(Character.getNumericValue(ch));
         
-        /*
         adcNaTabela();
 
         int numLinhas;
         Scanner scan = new Scanner(System.in);
         numLinhas = scan.nextInt();
 
-        for (int i = 0; i < numLinhas; i++){
+        if (numLinhas == 0) {
+            scan.close();
+            return;
+        }
+
+        for (int i = 0; i <= numLinhas; i++){
             String texto = scan.nextLine();
             String criptografia1 = primeiroProcessamento(texto);
             System.out.println(criptografia1);
         }
 
         scan.close();
-        */
 
     }
 
@@ -147,12 +144,15 @@ public class Main {
 
     public static String primeiroProcessamento(String texto){
         String retorno = "";
-        //65, 90
+
         for (int i = 0; i < texto.length(); i++){
             char charAtual = texto.charAt(i);
-            int charAtualAscii = Character.getNumericValue(charAtual);
+            int charAtualAscii = (int) charAtual;
+
             if (Character.isLetter(charAtual)){
-                retorno += Character.toChars(charAtualAscii + 3);
+                retorno += tabelaAscii.get(charAtualAscii + 3);
+            }else{
+                retorno += charAtual;
             }
         }
 
