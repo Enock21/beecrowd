@@ -23,8 +23,10 @@ public class Main {
 
         for (int i = 0; i <= numLinhas; i++){
             String texto = scan.nextLine();
-            String criptografia1 = primeiroProcessamento(texto);
-            System.out.println(criptografia1);
+            String criptoPasso1 = primeiroProcessamento(texto);
+            String criptoPasso2 = segundoProcessamento(criptoPasso1);
+        
+            System.out.println(criptoPasso2);
         }
 
         scan.close();
@@ -154,6 +156,16 @@ public class Main {
             }else{
                 retorno += charAtual;
             }
+        }
+
+        return retorno;
+    }
+
+    public static String segundoProcessamento(String texto){
+        String retorno = "";
+
+        for (int i = texto.length() - 1; i >= 0; i--){
+            retorno += texto.charAt(i);
         }
 
         return retorno;
