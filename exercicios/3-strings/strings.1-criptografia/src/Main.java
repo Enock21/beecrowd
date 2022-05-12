@@ -9,7 +9,8 @@ public class Main {
     static HashMap<Integer, Character> tabelaAscii = new HashMap<Integer, Character>();
  
     public static void main(String[] args) throws IOException {
-        
+        //Error: Time limit exceeded
+
         adcNaTabela();
 
         int numLinhas;
@@ -21,13 +22,20 @@ public class Main {
             return;
         }
 
-        for (int i = 0; i <= numLinhas; i++){
+        String retorno = "";
+
+        for (int i = 0; i < numLinhas; i++){
             String texto = scan.nextLine();
-            String criptoPasso1 = primeiroProcessamento(texto);
-            String criptoPasso2 = segundoProcessamento(criptoPasso1);
+            String cripto = criptografia(texto);
         
-            System.out.println(criptoPasso2);
+            if (i == numLinhas){
+                retorno += cripto;
+            }else{
+                retorno += cripto + "\n";
+            }
         }
+
+        System.out.println(retorno);
 
         scan.close();
 
@@ -144,6 +152,34 @@ public class Main {
         tabelaAscii.put(140,'ï');
     }
 
+    //Tentativa de realizar os 3 processamentos em um único laço for para promover agilidade
+    public static String criptografia(String texto){
+        String retorno = "";
+
+        for (int i = texto.length() - 1; i >= 0; i--){
+            char charAtual = texto.charAt(i);
+            int charAtualAscii = (int) charAtual;
+
+            if (i < texto.length() / 2){
+                if (Character.isLetter(charAtual)){
+                    retorno += tabelaAscii.get(charAtualAscii + 3);
+                }else{
+                    retorno += charAtual;
+                }
+            }else{
+                if (Character.isLetter(charAtual)){
+                    retorno += tabelaAscii.get(charAtualAscii + 2);
+                }else{
+                    retorno += tabelaAscii.get(charAtualAscii - 1);
+                }
+            }
+            
+        }
+
+        return retorno;
+    }
+    
+    //Deprecated
     public static String primeiroProcessamento(String texto){
         String retorno = "";
 
@@ -161,11 +197,28 @@ public class Main {
         return retorno;
     }
 
+    //Deprecated
     public static String segundoProcessamento(String texto){
         String retorno = "";
 
         for (int i = texto.length() - 1; i >= 0; i--){
             retorno += texto.charAt(i);
+        }
+
+        return retorno;
+    }
+
+    public static String terceiroProcessamento(String texto){
+        String retorno = "";
+
+        for (int i = 0; i < texto.length() / 2; i++){
+            retorno += texto.charAt(i);
+        }
+
+        for (int i = texto.length() / 2; i < texto.length(); i++){
+            Character charAtual = texto.charAt(i);
+            int charAtualAscii = (int) charAtual;
+            retorno += tabelaAscii.get(charAtualAscii - 1);
         }
 
         return retorno;
