@@ -9,7 +9,7 @@ public class Main {
     static HashMap<Integer, Character> tabelaAscii = new HashMap<Integer, Character>();
  
     public static void main(String[] args) throws IOException {
-        //Error: Time limit exceeded
+        //Error: Wrong answer 100%
 
         adcNaTabela();
 
@@ -33,7 +33,6 @@ public class Main {
         System.out.println(retorno);
 
         scan.close();
-
     }
 
     public static void adcNaTabela(){
@@ -155,7 +154,7 @@ public class Main {
             char charAtual = texto.charAt(i);
             int charAtualAscii = (int) charAtual;
 
-            if (i < texto.length() / 2){
+            if (i >= texto.length() / 2){
                 if (Character.isLetter(charAtual)){
                     retorno += tabelaAscii.get(charAtualAscii + 3);
                 }else{
