@@ -15,12 +15,7 @@ public class Main {
 
         int numLinhas;
         Scanner scan = new Scanner(System.in);
-        numLinhas = scan.nextInt();
-
-        if (numLinhas == 0) {
-            scan.close();
-            return;
-        }
+        numLinhas = Integer.parseInt(scan.nextLine());
 
         String retorno = "";
 
