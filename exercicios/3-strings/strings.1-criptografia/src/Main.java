@@ -9,13 +9,13 @@ public class Main {
     static HashMap<Integer, Character> tabelaAscii = new HashMap<Integer, Character>();
  
     public static void main(String[] args) throws IOException {
-        //Error: Wrong answer 100%
+        //Error: time limit exceeded, or wrong answer 100%
 
         adcNaTabela();
 
-        int numLinhas;
+        long numLinhas;
         Scanner scan = new Scanner(System.in);
-        numLinhas = Integer.parseInt(scan.nextLine());
+        numLinhas = Long.parseLong(scan.nextLine());
 
         String retorno = "";
 
@@ -23,7 +23,7 @@ public class Main {
             String texto = scan.nextLine();
             String cripto = criptografia(texto);
         
-            if (i == numLinhas){
+            if (i == numLinhas - 1){
                 retorno += cripto;
             }else{
                 retorno += cripto + "\n";
@@ -148,23 +148,41 @@ public class Main {
 
     //Tentativa de realizar os 3 processamentos em um único laço for para promover agilidade
     public static String criptografia(String texto){
+        char[] charArray = texto.toCharArray();
         String retorno = "";
 
         for (int i = texto.length() - 1; i >= 0; i--){
-            char charAtual = texto.charAt(i);
+            char charAtual = charArray[i];
             int charAtualAscii = (int) charAtual;
 
-            if (i >= texto.length() / 2){
-                if (Character.isLetter(charAtual)){
-                    retorno += tabelaAscii.get(charAtualAscii + 3);
+            if (texto.length() % 2 != 0){
+                if (i > texto.length() / 2){
+                    if (Character.isLetter(charAtual)){
+                        retorno += tabelaAscii.get(charAtualAscii + 3);
+                    }else{
+                        retorno += charAtual;
+                    }
                 }else{
-                    retorno += charAtual;
+                    if (Character.isLetter(charAtual)){
+                        retorno += tabelaAscii.get(charAtualAscii + 2);
+                    }else{
+                        retorno += tabelaAscii.get(charAtualAscii - 1);
+                    }
                 }
-            }else{
-                if (Character.isLetter(charAtual)){
-                    retorno += tabelaAscii.get(charAtualAscii + 2);
+            }
+            else{
+                if (i >= texto.length() / 2){
+                    if (Character.isLetter(charAtual)){
+                        retorno += tabelaAscii.get(charAtualAscii + 3);
+                    }else{
+                        retorno += charAtual;
+                    }
                 }else{
-                    retorno += tabelaAscii.get(charAtualAscii - 1);
+                    if (Character.isLetter(charAtual)){
+                        retorno += tabelaAscii.get(charAtualAscii + 2);
+                    }else{
+                        retorno += tabelaAscii.get(charAtualAscii - 1);
+                    }
                 }
             }
             
@@ -201,7 +219,8 @@ public class Main {
 
         return retorno;
     }
-
+    
+    //Deprecated
     public static String terceiroProcessamento(String texto){
         String retorno = "";
 
