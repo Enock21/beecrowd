@@ -1,240 +1,87 @@
+/*
+Autor: Enock Bezerra Ferreira de Souza
+Título: BEE 1024 - Criptografia
+
+Descrição: 
+
+Solicitaram para que você construisse um programa simples de criptografia. Este programa deve possibilitar enviar mensagens codificadas sem que alguém consiga lê-las. O processo é muito simples. São feitas três passadas em todo o texto.
+
+Na primeira passada, somente caracteres que sejam letras minúsculas e maiúsculas devem ser deslocadas 3 posições para a direita, segundo a tabela ASCII: letra 'a' deve virar letra 'd', letra 'y' deve virar caractere '|' e assim sucessivamente. Na segunda passada, a linha deverá ser invertida. Na terceira e última passada, todo e qualquer caractere a partir da metade em diante (truncada) devem ser deslocados uma posição para a esquerda na tabela ASCII. Neste caso, 'b' vira 'a' e 'a' vira '`'.
+
+Por exemplo, se a entrada for “Texto #3”, o primeiro processamento sobre esta entrada deverá produzir “Wh{wr #3”. O resultado do segundo processamento inverte os caracteres e produz “3# rw{hW”. Por último, com o deslocamento dos caracteres da metade em diante, o resultado final deve ser “3# rvzgV”.
+
+Entrada:
+A entrada contém vários casos de teste. A primeira linha de cada caso de teste contém um inteiro N (1 ≤ N ≤ 1*104), indicando a quantidade de linhas que o problema deve tratar. As N linhas contém cada uma delas M (1 ≤ M ≤ 1*103) caracteres.
+
+Saída:
+Para cada entrada, deve-se apresentar a mensagem criptografada.
+*/
+
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Scanner;
+import java.lang.StringBuilder;
  
-/**
- *
- */
 public class Main {
-    static HashMap<Integer, Character> tabelaAscii = new HashMap<Integer, Character>();
- 
+
+    /**
+     * Método principal que realiza a leitura e exibição de texto. A primeira linha deve ser um número inteiro correspondente a quantidade de linhas a serem criptografadas. As próximas linhas devem conter um texto. Após cada linha de texto será exibida a sua versão criptografada.
+     */
     public static void main(String[] args) throws IOException {
-        //Error: time limit exceeded, or wrong answer 100%
-
-        adcNaTabela();
-
         long numLinhas;
         Scanner scan = new Scanner(System.in);
         numLinhas = Long.parseLong(scan.nextLine());
 
-        String retorno = "";
-
         for (int i = 0; i < numLinhas; i++){
-            String texto = scan.nextLine();
-            String cripto = criptografia(texto);
+            StringBuilder texto = new StringBuilder(scan.nextLine());
+            StringBuilder cripto1 = primeiroProcessamento(texto);
+            StringBuilder cripto2 = segundoProcessamento(cripto1);
+            StringBuilder cripto3 = terceiroProcessamento(cripto2);
         
-            if (i == numLinhas - 1){
-                retorno += cripto;
-            }else{
-                retorno += cripto + "\n";
-            }
+            System.out.println(cripto3);
         }
-
-        System.out.println(retorno);
 
         scan.close();
     }
 
-    public static void adcNaTabela(){
-        tabelaAscii.put(32,' ');
-        tabelaAscii.put(33,'!');
-        tabelaAscii.put(34,'"');
-        tabelaAscii.put(35,'#');
-        tabelaAscii.put(36,'$');
-        tabelaAscii.put(37,'%');
-        tabelaAscii.put(38,'&');
-        tabelaAscii.put(39,'\'');
-        tabelaAscii.put(40,'(');
-        tabelaAscii.put(41,')');
-        tabelaAscii.put(42,'*');
-        tabelaAscii.put(43,'+');
-        tabelaAscii.put(44,',');
-        tabelaAscii.put(45,'-');
-        tabelaAscii.put(46,'.');
-        tabelaAscii.put(47,'/');
-        tabelaAscii.put(48,'0');
-        tabelaAscii.put(49,'1');
-        tabelaAscii.put(50,'2');
-        tabelaAscii.put(51,'3');
-        tabelaAscii.put(52,'4');
-        tabelaAscii.put(53,'5');
-        tabelaAscii.put(54,'6');
-        tabelaAscii.put(55,'7');
-        tabelaAscii.put(56,'8');
-        tabelaAscii.put(57,'9');
-        tabelaAscii.put(58,':');
-        tabelaAscii.put(59,';');
-        tabelaAscii.put(60,'<');
-        tabelaAscii.put(61,'=');
-        tabelaAscii.put(62,'>');
-        tabelaAscii.put(63,'?');
-        tabelaAscii.put(64,'@');
-        tabelaAscii.put(65,'A');
-        tabelaAscii.put(66,'B');
-        tabelaAscii.put(67,'C');
-        tabelaAscii.put(68,'D');
-        tabelaAscii.put(69,'E');
-        tabelaAscii.put(70,'F');
-        tabelaAscii.put(71,'G');
-        tabelaAscii.put(72,'H');
-        tabelaAscii.put(73,'I');
-        tabelaAscii.put(74,'J');
-        tabelaAscii.put(75,'K');
-        tabelaAscii.put(76,'L');
-        tabelaAscii.put(77,'M');
-        tabelaAscii.put(78,'N');
-        tabelaAscii.put(79,'O');
-        tabelaAscii.put(80,'P');
-        tabelaAscii.put(81,'Q');
-        tabelaAscii.put(82,'R');
-        tabelaAscii.put(83,'S');
-        tabelaAscii.put(84,'T');
-        tabelaAscii.put(85,'U');
-        tabelaAscii.put(86,'V');
-        tabelaAscii.put(87,'W');
-        tabelaAscii.put(88,'X');
-        tabelaAscii.put(89,'Y');
-        tabelaAscii.put(90,'Z');
-        tabelaAscii.put(91,'[');
-        tabelaAscii.put(92,'\\');
-        tabelaAscii.put(93,']');
-        tabelaAscii.put(94,'^');
-        tabelaAscii.put(95,'_');
-        tabelaAscii.put(96,'`');
-        tabelaAscii.put(97,'a');
-        tabelaAscii.put(98,'b');
-        tabelaAscii.put(99,'c');
-        tabelaAscii.put(100,'d');
-        tabelaAscii.put(101,'e');
-        tabelaAscii.put(102,'f');
-        tabelaAscii.put(103,'g');
-        tabelaAscii.put(104,'h');
-        tabelaAscii.put(105,'i');
-        tabelaAscii.put(106,'j');
-        tabelaAscii.put(107,'k');
-        tabelaAscii.put(108,'l');
-        tabelaAscii.put(109,'m');
-        tabelaAscii.put(110,'n');
-        tabelaAscii.put(111,'o');
-        tabelaAscii.put(112,'p');
-        tabelaAscii.put(113,'q');
-        tabelaAscii.put(114,'r');
-        tabelaAscii.put(115,'s');
-        tabelaAscii.put(116,'t');
-        tabelaAscii.put(117,'u');
-        tabelaAscii.put(118,'v');
-        tabelaAscii.put(119,'w');
-        tabelaAscii.put(120,'x');
-        tabelaAscii.put(121,'y');
-        tabelaAscii.put(122,'z');
-        tabelaAscii.put(123,'{');
-        tabelaAscii.put(124,'|');
-        tabelaAscii.put(125,'}');
-        tabelaAscii.put(126,'~');
-        tabelaAscii.put(128,'Ç');
-        tabelaAscii.put(129,'ü');
-        tabelaAscii.put(130,'é');
-        tabelaAscii.put(131,'â');
-        tabelaAscii.put(132,'ä');
-        tabelaAscii.put(133,'à');
-        tabelaAscii.put(134,'å');
-        tabelaAscii.put(135,'ç');
-        tabelaAscii.put(136,'ê');
-        tabelaAscii.put(137,'ë');
-        tabelaAscii.put(138,'è');
-        tabelaAscii.put(139,'ï');
-        tabelaAscii.put(140,'ï');
-    }
-
-    //Tentativa de realizar os 3 processamentos em um único laço for para promover agilidade
-    public static String criptografia(String texto){
-        char[] charArray = texto.toCharArray();
-        String retorno = "";
-
-        for (int i = texto.length() - 1; i >= 0; i--){
-            char charAtual = charArray[i];
-            int charAtualAscii = (int) charAtual;
-
-            if (texto.length() % 2 != 0){
-                if (i > texto.length() / 2){
-                    if (Character.isLetter(charAtual)){
-                        retorno += tabelaAscii.get(charAtualAscii + 3);
-                    }else{
-                        retorno += charAtual;
-                    }
-                }else{
-                    if (Character.isLetter(charAtual)){
-                        retorno += tabelaAscii.get(charAtualAscii + 2);
-                    }else{
-                        retorno += tabelaAscii.get(charAtualAscii - 1);
-                    }
-                }
-            }
-            else{
-                if (i >= texto.length() / 2){
-                    if (Character.isLetter(charAtual)){
-                        retorno += tabelaAscii.get(charAtualAscii + 3);
-                    }else{
-                        retorno += charAtual;
-                    }
-                }else{
-                    if (Character.isLetter(charAtual)){
-                        retorno += tabelaAscii.get(charAtualAscii + 2);
-                    }else{
-                        retorno += tabelaAscii.get(charAtualAscii - 1);
-                    }
-                }
-            }
-            
-        }
-
-        return retorno;
-    }
-    
-    //Deprecated
-    public static String primeiroProcessamento(String texto){
-        String retorno = "";
-
+    /**
+     * Primeiro passo da criptografia, no qual o texto passado como parãmetro tem suas letras trocadas pelo caractere na tabela Ascii que se encontra 3 posições à direita da letra original.
+     * @param texto Um texto original do tipo StringBuilder. Esta classe foi usada no lugar da String para promover desempenho.
+     */
+    public static StringBuilder primeiroProcessamento(StringBuilder texto){
         for (int i = 0; i < texto.length(); i++){
             char charAtual = texto.charAt(i);
             int charAtualAscii = (int) charAtual;
 
             if (Character.isLetter(charAtual)){
-                retorno += tabelaAscii.get(charAtualAscii + 3);
-            }else{
-                retorno += charAtual;
+                texto.setCharAt(i, (char) (charAtualAscii + 3));
             }
         }
 
-        return retorno;
+        return texto;
     }
 
-    //Deprecated
-    public static String segundoProcessamento(String texto){
-        String retorno = "";
-
-        for (int i = texto.length() - 1; i >= 0; i--){
-            retorno += texto.charAt(i);
-        }
-
-        return retorno;
+    /**
+     * Segundo passo da criptografia, na qual o texto passado como parâmetro é invertido.
+     * @param texto É esperado um texto já modificado pelo primeiro passo da criptografia.
+     */
+    public static StringBuilder segundoProcessamento(StringBuilder texto){
+        texto.reverse();
+        return texto;
     }
-    
-    //Deprecated
-    public static String terceiroProcessamento(String texto){
-        String retorno = "";
-
-        for (int i = 0; i < texto.length() / 2; i++){
-            retorno += texto.charAt(i);
-        }
-
+   
+    /**
+     * Terceiro e último passo da criptografia no qual, a partir da metade do StringBuilder para a direita, todos os caracteres são deslocados 1 posição para a esquerda de acordo com a tabela Ascii.
+     * @param texto É esperado um texto já modificado pelo primeiro e segundo passo da criptografia.
+     * @return Texto pronto para exibição final.
+     */
+    public static StringBuilder terceiroProcessamento(StringBuilder texto){
         for (int i = texto.length() / 2; i < texto.length(); i++){
             Character charAtual = texto.charAt(i);
             int charAtualAscii = (int) charAtual;
-            retorno += tabelaAscii.get(charAtualAscii - 1);
+
+            texto.setCharAt(i, (char) (charAtualAscii - 1));
         }
 
-        return retorno;
+        return texto;
     }
- 
 }
