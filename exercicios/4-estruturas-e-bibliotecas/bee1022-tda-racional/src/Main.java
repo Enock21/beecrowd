@@ -11,46 +11,40 @@ public class Main
     public static void main(String[] args) throws Exception 
     {
         Scanner scan = new Scanner(System.in);
-        //int numLinhas = Integer.parseInt(scan.nextLine());
+        int numLinhas = Integer.parseInt(scan.nextLine());
 
-        //TEMPORARIO
-        String calculo = scan.nextLine();
-        Integer[][] resultado = conversorStringArray(calculo);
-
-        for (int i = 0; i < 2; i++)
-        {
-            for (int j = 0; j < 2; j++)
-            {
-                System.out.println(resultado[i][j]);
-            }
-        }
-
-        /*
         for (int i = 0; i < numLinhas; i++)
         {
-            String calculo = scan.nextLine();
-            char operacao = calculo.charAt(6);
+            String calculoStr = scan.nextLine();
+
+            char operacao = calculoStr.charAt(6);
+
+            Integer[][] calculoArrayInt = conversorStringArray(calculoStr);
             
+            Integer[] resultado;
+
             switch (operacao)
             {
                 case '+':
-                    System.out.println(somador(calculo));
+                    resultado = somador(calculoArrayInt);
                     break;
                 case '-':
-                    System.out.println(subtrator(calculo));
+                    resultado = subtrator(calculoArrayInt);
                     break;
                 case '*':
-                    System.out.println(multiplicador(calculo));
+                    resultado = multiplicador(calculoArrayInt);
                     break;
                 case '/':
-                    System.out.println(divisor(calculo));
+                    resultado = divisor(calculoArrayInt);
                     break;
                 default:
-                    System.out.println("Operação inválida!");
-                    break;
+                    throw new IllegalArgumentException("Operação inválida!");
             }
+
+            Integer[][] resultadoComSimplificacao = simplificador(resultado);
+            String resultadoFinalStr = conversorArrayString(resultadoComSimplificacao);
+            System.out.println(resultadoFinalStr);
         }
-        */
 
         scan.close();
     }
@@ -79,8 +73,12 @@ public class Main
         return retorno;
     }
     
-    public static Integer[] simplificador(Integer[] racional)
+    public static Integer[][] simplificador(Integer[] racional)
     {
+        Integer[][] retorno = new Integer[2][2];
+        retorno[0][0] = racional[0];
+        retorno[0][1] = racional[1];
+
         int maiorValor = 0;
         if (racional[0] >= racional[1]){ maiorValor = racional[0]; }
         else{ maiorValor = racional[1]; }
@@ -90,32 +88,39 @@ public class Main
             if ((racional[0] % num == 0) &&
                 (racional[1] % num == 0))
             {
-                racional[0] = racional[0] / num;
-                racional[1] = racional[1] / num;
+                retorno[1][0] = racional[0] / num;
+                retorno[1][1] = racional[1] / num;
             }
         }
 
-        return racional;
+        return retorno;
     }
     
-    public static String somador(String calculo)
+    public static String conversorArrayString(Integer[][] racional)
     {
-        return "somador";
+        String retorno = racional[0][0] + "/" + racional[0][1] + " = " +
+                         racional[1][0] + "/" + racional[1][1];
+        return retorno;
     }
 
-    public static String subtrator(String calculo)
+    public static Integer[] somador(Integer[][] calculo)
     {
-        return "subtrator";
+        return null;
     }
 
-    public static String multiplicador(String calculo)
+    public static Integer[] subtrator(Integer[][] calculo)
     {
-        return "multiplicador";
+        return null;
     }
 
-    public static String divisor(String calculo)
+    public static Integer[] multiplicador(Integer[][] calculo)
     {
-        return "divisor";
+        return null;
+    }
+
+    public static Integer[] divisor(Integer[][] calculo)
+    {
+        return null;
     }
 
 }
