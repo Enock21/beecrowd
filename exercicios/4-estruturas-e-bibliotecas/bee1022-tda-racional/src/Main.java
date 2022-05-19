@@ -15,13 +15,13 @@ public class Main
 
         //TEMPORARIO
         String calculo = scan.nextLine();
-        ArrayList<Integer[]> resultado = conversorStringArray(calculo);
+        Integer[][] resultado = conversorStringArray(calculo);
 
         for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < 2; j++)
             {
-                System.out.println(resultado.get(i)[j]);
+                System.out.println(resultado[i][j]);
             }
         }
 
@@ -55,9 +55,9 @@ public class Main
         scan.close();
     }
 
-    public static ArrayList<Integer[]> conversorStringArray(String calculo)
+    public static Integer[][] conversorStringArray(String calculo)
     {
-        ArrayList<Integer[]> retorno = new ArrayList<Integer[]>(2);
+        Integer[][] retorno = new Integer[2][2];
 
         String numerador1Str = "" + calculo.charAt(INDEX_NUMERADOR1);
         int numerador1 = Integer.parseInt(numerador1Str);
@@ -71,10 +71,10 @@ public class Main
         String denominador2Str = "" + calculo.charAt(INDEX_DENOMINADOR2);
         int denominador2 = Integer.parseInt(denominador2Str);
 
-        retorno.get(0)[0] = numerador1;
-        retorno.get(0)[1] = denominador1;
-        retorno.get(1)[0] = numerador2;
-        retorno.get(1)[1] = denominador2;
+        retorno[0][0] = numerador1;
+        retorno[0][1] = denominador1;
+        retorno[1][0] = numerador2;
+        retorno[1][1] = denominador2;
 
         return retorno;
     }
