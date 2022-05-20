@@ -48,23 +48,43 @@ public class Main
     public static Integer[][] conversorStringArray(String calculo)
     {
         Integer[][] retorno = new Integer[2][2];
+        Integer[] calculoArray = new Integer[4];
+        
+        int count = 0;
+        String fatia = "";
+        for (int i = 0; i < calculo.length(); i++)
+        {
+            if (calculo.charAt(i) == ' ' ||
+                calculo.charAt(i) == '+' ||
+                calculo.charAt(i) == '-' ||
+                calculo.charAt(i) == '*' ||
+                calculo.charAt(i) == '/' ||
+                i == calculo.length() - 1)
+            {
+                calculoArray[count] = Integer.parseInt(fatia);
+                count++;
+                fatia = "";
+                continue;
+            }
 
-        String numerador1Str = "" + calculo.charAt(INDEX_NUMERADOR1);
-        int numerador1 = Integer.parseInt(numerador1Str);
+            fatia += 
+        }
 
-        String denominador1Str = "" + calculo.charAt(INDEX_DENOMINADOR1);
-        int denominador1 = Integer.parseInt(denominador1Str);
-
-        String numerador2Str = "" + calculo.charAt(INDEX_NUMERADOR2);
-        int numerador2 = Integer.parseInt(numerador2Str);
-
-        String denominador2Str = "" + calculo.charAt(INDEX_DENOMINADOR2);
-        int denominador2 = Integer.parseInt(denominador2Str);
-
-        retorno[0][0] = numerador1;
-        retorno[0][1] = denominador1;
-        retorno[1][0] = numerador2;
-        retorno[1][1] = denominador2;
+        int count = 0;
+        for (int i = 0; i < retorno.length; i++){
+            for (int j = 0; j < retorno.length; j++)
+            {
+                String elemento = calculoArray[count];
+                try
+                {
+                    retorno[i][j] = Integer.parseInt(calculoArray[count]);
+                    count++;
+                }catch(NumberFormatException NFE)
+                {
+                    continue;
+                }
+            }
+        }    
 
         return retorno;
     }
