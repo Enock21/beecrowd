@@ -118,6 +118,10 @@ public class Main
             {
                 retorno[1][0] = racional[0] / num;
                 retorno[1][1] = racional[1] / num;
+            }else
+            {
+                retorno[1][0] = racional[0];
+                retorno[1][1] = racional[1];
             }
         }
 
