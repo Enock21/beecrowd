@@ -2,11 +2,6 @@ import java.util.Scanner;
 
 public class Main 
 {
-    static final int INDEX_NUMERADOR1 = 0;
-    static final int INDEX_DENOMINADOR1 = 4;
-    static final int INDEX_NUMERADOR2 = 8;
-    static final int INDEX_DENOMINADOR2 = 12;
-
     public static void main(String[] args) throws Exception 
     {
         Scanner scan = new Scanner(System.in);
@@ -15,7 +10,22 @@ public class Main
         for (int i = 0; i < numLinhas; i++)
         {
             String calculoStr = scan.nextLine();
-            char operacao = calculoStr.charAt(6);
+
+            char operacao = ' ';
+            for (int j = 0; j < calculoStr.length(); j++)
+            {
+                if (calculoStr.charAt(j) == '+' ||
+                    calculoStr.charAt(j) == '-' ||
+                    calculoStr.charAt(j) == '*')
+                {
+                    operacao = calculoStr.charAt(j);
+                    break;
+                }else if (j == calculoStr.length() - 1)
+                {
+                    operacao = '/';
+                }
+            }
+
             Integer[][] calculoArrayInt = conversorStringArray(calculoStr);
             
             Integer[] resultado;
@@ -54,35 +64,37 @@ public class Main
         String fatia = "";
         for (int i = 0; i < calculo.length(); i++)
         {
+            if (i == calculo.length() - 1)
+            {
+                fatia += calculo.charAt(i);
+                calculoArray[count] = Integer.parseInt(fatia);
+            }
             if (calculo.charAt(i) == ' ' ||
                 calculo.charAt(i) == '+' ||
                 calculo.charAt(i) == '-' ||
                 calculo.charAt(i) == '*' ||
-                calculo.charAt(i) == '/' ||
-                i == calculo.length() - 1)
+                calculo.charAt(i) == '/')
             {
-                calculoArray[count] = Integer.parseInt(fatia);
-                count++;
-                fatia = "";
-                continue;
+                if (!fatia.equals(""))
+                {
+                    calculoArray[count] = Integer.parseInt(fatia);
+                    count++;
+                    fatia = "";
+                    continue;
+                }else { continue; }
             }
 
-            fatia += 
+            fatia += calculo.charAt(i);
         }
 
-        int count = 0;
-        for (int i = 0; i < retorno.length; i++){
+        int count2 = 0;
+        for (int i = 0; i < retorno.length; i++)
+        {
             for (int j = 0; j < retorno.length; j++)
             {
-                String elemento = calculoArray[count];
-                try
-                {
-                    retorno[i][j] = Integer.parseInt(calculoArray[count]);
-                    count++;
-                }catch(NumberFormatException NFE)
-                {
-                    continue;
-                }
+                int num = calculoArray[count2];
+                retorno[i][j] = num;
+                count2++;
             }
         }    
 
