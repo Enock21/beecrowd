@@ -9,6 +9,20 @@ public class Main
 
         for (int i = 0; i < numLinhas; i++)
         {
+            int num1 = scan.nextInt(); //Pega o numerador 1
+            scan.next(); //Pula a próxima barra
+            int den1 = scan.nextInt(); //Pega o denominador 1
+            char operacao = scan.next().charAt(0); //Pega o sinal que indica a operação
+            int num2 = scan.nextInt(); //Pega o numerador 2
+            scan.next(); //Pula a próxima barra
+            int den2 = scan.nextInt(); //Pega o denominador 2
+
+
+        }
+
+        /*
+        for (int i = 0; i < numLinhas; i++)
+        {
             String calculoStr = scan.nextLine();
 
             char operacao = ' ';
@@ -51,6 +65,7 @@ public class Main
             String resultadoFinalStr = conversorArrayString(resultadoComSimplificacao);
             System.out.println(resultadoFinalStr);
         }
+        */
     
         scan.close();
     }
