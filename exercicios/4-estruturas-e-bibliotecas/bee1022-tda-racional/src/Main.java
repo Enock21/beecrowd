@@ -148,6 +148,23 @@ public class Main
     }
     */
 
+    public static Integer mdc(int num1, int num2)
+    {
+        int mdc = 1;
+        int divisorAtual = 2;
+
+        while (num1 > 1 && num2 > 1)
+        {
+            if (num1 % divisorAtual == 0 &&
+                num2 % divisorAtual == 0)
+            {
+                mdc = mdc * divisorAtual;
+            }else if (num1 % divisorAtual == )
+            num1 = num1 / divisorAtual;
+            num2 = num1 / divisorAtual;
+        }
+    }
+
     //Errado!
     public static Integer[][] simplificador(Integer[] racional)
     {
