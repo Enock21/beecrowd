@@ -7,18 +7,45 @@ public class Main
         Scanner scan = new Scanner(System.in);
         int numLinhas = Integer.parseInt(scan.nextLine());
 
+        int num1 = 0;
+        int den1 = 0;
+        char operacao = '.';
+        int num2 = 0;
+        int den2 = 0;
         for (int i = 0; i < numLinhas; i++)
         {
-            int num1 = scan.nextInt(); //Pega o numerador 1
+            num1 = scan.nextInt(); //Pega o numerador 1
             scan.next(); //Pula a próxima barra
-            int den1 = scan.nextInt(); //Pega o denominador 1
-            char operacao = scan.next().charAt(0); //Pega o sinal que indica a operação
-            int num2 = scan.nextInt(); //Pega o numerador 2
+            den1 = scan.nextInt(); //Pega o denominador 1
+            operacao = scan.next().charAt(0); //Pega o sinal que indica a operação
+            num2 = scan.nextInt(); //Pega o numerador 2
             scan.next(); //Pula a próxima barra
-            int den2 = scan.nextInt(); //Pega o denominador 2
-
+            den2 = scan.nextInt(); //Pega o denominador 2
 
         }
+
+        Integer[] resultado;
+        switch (operacao)
+        {
+            case '+':
+                resultado = somador(num1, den1, num2, den2);
+                break;
+            case '-':
+                resultado = subtrator(num1, den1, num2, den2);
+                break;
+            case '*':
+                resultado = multiplicador(num1, den1, num2, den2);
+                break;
+            case '/':
+                resultado = divisor(num1, den1, num2, den2);
+                break;
+            default:
+                scan.close();
+                throw new IllegalArgumentException("Operação inválida!");
+        }
+
+        Integer[][] resultadoSimplificado = simplificador(resultado);
+        System.out.println(conversorArrayString(resultadoSimplificado));
 
         /*
         for (int i = 0; i < numLinhas; i++)
@@ -70,6 +97,10 @@ public class Main
         scan.close();
     }
 
+    
+
+    /*
+    //Deprecated
     public static Integer[][] conversorStringArray(String calculo)
     {
         Integer[][] retorno = new Integer[2][2];
@@ -115,7 +146,9 @@ public class Main
 
         return retorno;
     }
-    
+    */
+
+    //Errado!
     public static Integer[][] simplificador(Integer[] racional)
     {
         Integer[][] retorno = new Integer[2][2];
@@ -150,62 +183,42 @@ public class Main
         return retorno;
     }
 
-    public static Integer[] somador(Integer[][] calculo)
+    public static Integer[] somador(int num1, int den1, int num2, int den2)
     {
         Integer[] resultado = new Integer[2];
 
-        int numerador1 = calculo[0][0];
-        int denominador1 = calculo[0][1];
-        int numerador2 = calculo[1][0];
-        int denominador2 = calculo[1][1];
-
-        resultado[0] = (numerador1 * denominador2) + (numerador2 * denominador1);
-        resultado[1] = denominador1 * denominador2;
+        resultado[0] = (num1 * den2) + (num2 * den1);
+        resultado[1] = den1 * den2;
 
         return resultado;
     }
 
-    public static Integer[] subtrator(Integer[][] calculo)
+    public static Integer[] subtrator(int num1, int den1, int num2, int den2)
     {
         Integer[] resultado = new Integer[2];
 
-        int numerador1 = calculo[0][0];
-        int denominador1 = calculo[0][1];
-        int numerador2 = calculo[1][0];
-        int denominador2 = calculo[1][1];
-
-        resultado[0] = (numerador1 * denominador2) - (numerador2 * denominador1);
-        resultado[1] = denominador1 * denominador2;
+        resultado[0] = (num1 * den2) - (num2 * den1);
+        resultado[1] = den1 * den2;
 
         return resultado;
     }
 
-    public static Integer[] multiplicador(Integer[][] calculo)
+    public static Integer[] multiplicador(int num1, int den1, int num2, int den2)
     {
         Integer[] resultado = new Integer[2];
 
-        int numerador1 = calculo[0][0];
-        int denominador1 = calculo[0][1];
-        int numerador2 = calculo[1][0];
-        int denominador2 = calculo[1][1];
-
-        resultado[0] = numerador1 * numerador2;
-        resultado[1] = denominador1 * denominador2;
+        resultado[0] = num1 * num2;
+        resultado[1] = den1 * den2;
 
         return resultado;
     }
 
-    public static Integer[] divisor(Integer[][] calculo)
+    public static Integer[] divisor(int num1, int den1, int num2, int den2)
     {
         Integer[] resultado = new Integer[2];
 
-        int numerador1 = calculo[0][0];
-        int denominador1 = calculo[0][1];
-        int numerador2 = calculo[1][0];
-        int denominador2 = calculo[1][1];
-
-        resultado[0] = numerador1 * denominador2;
-        resultado[1] = numerador2 * denominador1;
+        resultado[0] = num1 * den2;
+        resultado[1] = num2 * den1;
 
         return resultado;
     }
