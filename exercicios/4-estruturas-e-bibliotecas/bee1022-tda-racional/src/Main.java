@@ -4,6 +4,7 @@ public class Main
 {
     public static void main(String[] args) throws Exception 
     {
+        
         Scanner scan = new Scanner(System.in);
         int numLinhas = Integer.parseInt(scan.nextLine());
 
@@ -93,7 +94,7 @@ public class Main
             System.out.println(resultadoFinalStr);
         }
         */
-    
+        
         scan.close();
     }
 
@@ -148,49 +149,11 @@ public class Main
     }
     */
 
-    public static Integer mdc(int num1, int num2)
-    {
-        int mdc = 1;
-        int divisorAtual = 2;
-
-        while (num1 > 1 && num2 > 1)
-        {
-            if (num1 % divisorAtual == 0 &&
-                num2 % divisorAtual == 0)
-            {
-                mdc = mdc * divisorAtual;
-            }else if (num1 % divisorAtual == )
-            num1 = num1 / divisorAtual;
-            num2 = num1 / divisorAtual;
-        }
-    }
-
-    //Errado!
-    public static Integer[][] simplificador(Integer[] racional)
-    {
-        Integer[][] retorno = new Integer[2][2];
-        retorno[0][0] = racional[0];
-        retorno[0][1] = racional[1];
-
-        int maiorValor = 0;
-        if (racional[0] >= racional[1]){ maiorValor = racional[0]; }
-        else{ maiorValor = racional[1]; }
-
-        for (int num = 2; num < maiorValor; num++)
-        {
-            if ((racional[0] % num == 0) &&
-                (racional[1] % num == 0))
-            {
-                retorno[1][0] = racional[0] / num;
-                retorno[1][1] = racional[1] / num;
-            }else
-            {
-                retorno[1][0] = racional[0];
-                retorno[1][1] = racional[1];
-            }
-        }
-
-        return retorno;
+    static int mdc(int a, int b){
+        if(b == 0)
+            return a;
+        else
+            return mdc(b, a%b);
     }
     
     public static String conversorArrayString(Integer[][] racional)
