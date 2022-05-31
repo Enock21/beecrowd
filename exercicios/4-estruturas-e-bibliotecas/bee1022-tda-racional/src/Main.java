@@ -48,114 +48,52 @@ public class Main
         Integer[][] resultadoSimplificado = simplificador(resultado);
         System.out.println(conversorArrayString(resultadoSimplificado));
 
-        /*
-        for (int i = 0; i < numLinhas; i++)
-        {
-            String calculoStr = scan.nextLine();
-
-            char operacao = ' ';
-            for (int j = 0; j < calculoStr.length(); j++)
-            {
-                if (calculoStr.charAt(j) == '+' ||
-                    calculoStr.charAt(j) == '-' ||
-                    calculoStr.charAt(j) == '*')
-                {
-                    operacao = calculoStr.charAt(j);
-                    break;
-                }else if (j == calculoStr.length() - 1)
-                {
-                    operacao = '/';
-                }
-            }
-
-            Integer[][] calculoArrayInt = conversorStringArray(calculoStr);
-            
-            Integer[] resultado;
-            switch (operacao)
-            {
-                case '+':
-                    resultado = somador(calculoArrayInt);
-                    break;
-                case '-':
-                    resultado = subtrator(calculoArrayInt);
-                    break;
-                case '*':
-                    resultado = multiplicador(calculoArrayInt);
-                    break;
-                case '/':
-                    resultado = divisor(calculoArrayInt);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Operação inválida!");
-            }
-
-            Integer[][] resultadoComSimplificacao = simplificador(resultado);
-            String resultadoFinalStr = conversorArrayString(resultadoComSimplificacao);
-            System.out.println(resultadoFinalStr);
-        }
-        */
-        
         scan.close();
     }
 
-    
+    static int mdc(int a, int b)
+    {
 
-    /*
-    //Deprecated
-    public static Integer[][] conversorStringArray(String calculo)
+        int mdc = 1;
+        int div = 2;
+
+        do
+        {
+            if (a % div == 0)
+            {
+                a /= div;
+            }
+            if (b % div == 0)
+            {
+                b /= div;
+            }
+            if (a % div == 0 && b % div == 0)
+            {
+                mdc *= div;
+            }
+            if (a % div != 0 && b % div != 0)
+            {
+                div++;
+            }
+        }while(a > 1 && b > 1);
+
+        return mdc;
+
+    }
+    
+    static Integer[][] simplificador(Integer[] racional)
     {
         Integer[][] retorno = new Integer[2][2];
-        Integer[] calculoArray = new Integer[4];
-        
-        int count = 0;
-        String fatia = "";
-        for (int i = 0; i < calculo.length(); i++)
-        {
-            if (i == calculo.length() - 1)
-            {
-                fatia += calculo.charAt(i);
-                calculoArray[count] = Integer.parseInt(fatia);
-            }
-            if (calculo.charAt(i) == ' ' ||
-                calculo.charAt(i) == '+' ||
-                calculo.charAt(i) == '-' ||
-                calculo.charAt(i) == '*' ||
-                calculo.charAt(i) == '/')
-            {
-                if (!fatia.equals(""))
-                {
-                    calculoArray[count] = Integer.parseInt(fatia);
-                    count++;
-                    fatia = "";
-                    continue;
-                }else { continue; }
-            }
+        int mdc = mdc(racional[0], racional[1]);
 
-            fatia += calculo.charAt(i);
-        }
-
-        int count2 = 0;
-        for (int i = 0; i < retorno.length; i++)
-        {
-            for (int j = 0; j < retorno.length; j++)
-            {
-                int num = calculoArray[count2];
-                retorno[i][j] = num;
-                count2++;
-            }
-        }    
+        retorno[0][0] = racional[0];
+        retorno[0][1] = racional[1];
+        retorno[1][0] = racional[0] / mdc;
+        retorno[1][1] = racional[1] / mdc;
 
         return retorno;
     }
-    */
 
-    static int mdc(int a, int b){
-        if(b == 0)
-            return a;
-        else
-            return mdc(b, a%b);
-    }
-    
     public static String conversorArrayString(Integer[][] racional)
     {
         String retorno = racional[0][0] + "/" + racional[0][1] + " = " +
