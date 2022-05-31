@@ -23,32 +23,32 @@ public class Main
             scan.next(); //Pula a próxima barra
             den2 = scan.nextInt(); //Pega o denominador 2
 
+            Integer[] resultado;
+            switch (operacao)
+            {
+                case '+':
+                    resultado = somador(num1, den1, num2, den2);
+                    break;
+                case '-':
+                    resultado = subtrator(num1, den1, num2, den2);
+                    break;
+                case '*':
+                    resultado = multiplicador(num1, den1, num2, den2);
+                    break;
+                case '/':
+                    resultado = divisor(num1, den1, num2, den2);
+                    break;
+                default:
+                    scan.close();
+                    throw new IllegalArgumentException("Operação inválida!");
+            }
+
+            Integer[][] resultadoSimplificado = simplificador(resultado);
+            System.out.println(conversorArrayString(resultadoSimplificado));
+
         }
 
-        Integer[] resultado;
-        switch (operacao)
-        {
-            case '+':
-                resultado = somador(num1, den1, num2, den2);
-                break;
-            case '-':
-                resultado = subtrator(num1, den1, num2, den2);
-                break;
-            case '*':
-                resultado = multiplicador(num1, den1, num2, den2);
-                break;
-            case '/':
-                resultado = divisor(num1, den1, num2, den2);
-                break;
-            default:
-                scan.close();
-                throw new IllegalArgumentException("Operação inválida!");
-        }
-
-        Integer[][] resultadoSimplificado = simplificador(resultado);
-        System.out.println(conversorArrayString(resultadoSimplificado));
-
-        scan.close();
+            scan.close();
     }
 
     static int mdc(int a, int b)
@@ -59,6 +59,14 @@ public class Main
 
         do
         {
+            if ((a % div == 0) && (b % div == 0))
+            {
+                mdc *= div;
+            }
+            if ((a % div != 0) && (b % div != 0))
+            {
+                div++;
+            }
             if (a % div == 0)
             {
                 a /= div;
@@ -67,14 +75,7 @@ public class Main
             {
                 b /= div;
             }
-            if (a % div == 0 && b % div == 0)
-            {
-                mdc *= div;
-            }
-            if (a % div != 0 && b % div != 0)
-            {
-                div++;
-            }
+           
         }while(a > 1 && b > 1);
 
         return mdc;
@@ -84,12 +85,14 @@ public class Main
     static Integer[][] simplificador(Integer[] racional)
     {
         Integer[][] retorno = new Integer[2][2];
-        int mdc = mdc(racional[0], racional[1]);
+        int num = racional[0];
+        int den = racional[1];
+        int mdcVar = mdc(num, den);//!!!!!!!!!!?????????
 
         retorno[0][0] = racional[0];
         retorno[0][1] = racional[1];
-        retorno[1][0] = racional[0] / mdc;
-        retorno[1][1] = racional[1] / mdc;
+        retorno[1][0] = racional[0] / mdcVar;
+        retorno[1][1] = racional[1] / mdcVar;
 
         return retorno;
     }
