@@ -76,7 +76,7 @@ public class Main
                 b /= div;
             }
            
-        }while(a > 1 && b > 1);
+        }while(a > 1 || b > 1);
 
         return mdc;
 
@@ -87,7 +87,7 @@ public class Main
         Integer[][] retorno = new Integer[2][2];
         int num = racional[0];
         int den = racional[1];
-        int mdcVar = mdc(num, den);//!!!!!!!!!!?????????
+        int mdcVar = mdc(num, den);
 
         retorno[0][0] = racional[0];
         retorno[0][1] = racional[1];
