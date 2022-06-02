@@ -54,6 +54,9 @@ public class Main
     static int mdc(int a, int b)
     {
 
+        int max = a;
+        if (b > max) { max = b; }
+        
         int mdc = 1;
         int div = 2;
 
@@ -62,21 +65,14 @@ public class Main
             if ((a % div == 0) && (b % div == 0))
             {
                 mdc *= div;
-            }
-            if ((a % div != 0) && (b % div != 0))
+                a /= div;
+                b /= div;
+            }else
             {
                 div++;
             }
-            if (a % div == 0)
-            {
-                a /= div;
-            }
-            if (b % div == 0)
-            {
-                b /= div;
-            }
            
-        }while(a > 1 || b > 1);
+        }while(div <= max);
 
         return mdc;
 
