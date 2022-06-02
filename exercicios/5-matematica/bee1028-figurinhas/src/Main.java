@@ -18,11 +18,42 @@ public class Main
     }
 
     /**
-     * Calcula o Máximo Divisor Comum (MDC) de dois números passados como parâmetros.
+     * Realiza o mdc entre os números f1 e f2 usando o algoritmo de Euclides.
+     * @param f1
+     * @param f2
+     * @return
+     */
+    static int mdc(int f1, int f2)
+    {
+        int maior = 0;
+        int menor = 0;
+
+        if (f1 > f2)
+        {
+            maior = f1;
+            menor = f2;
+        }else
+        {
+            maior = f2;
+            menor = f1;
+        }
+
+        do
+        {
+            maior -= menor; //ERRADO!
+            
+
+        }while(menor > 0);
+
+        return maior;
+    }
+
+    /**
+     * Calcula o Máximo Divisor Comum (MDC) de dois números passados como parâmetros. (DEPRECATED)
      * @param a Numerador.
      * @param b Denominador.
      * @return MDC inteiro.
-     */
+     
     static int mdc(int a, int b)
     {
 
@@ -49,4 +80,5 @@ public class Main
         return mdc;
 
     }
+    */
 }
