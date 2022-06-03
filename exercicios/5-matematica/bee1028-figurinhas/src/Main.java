@@ -25,24 +25,20 @@ public class Main
      */
     static int mdc(int f1, int f2)
     {
-        int maior = 0;
-        int menor = 0;
-
-        if (f1 > f2)
-        {
-            maior = f1;
-            menor = f2;
-        }else
-        {
-            maior = f2;
-            menor = f1;
-        }
+        int maior = f1;
+        int menor = f2;
+        int temp = 0; //Variável cujo propósito é o de temporariamente guardar um valor durante uma troca de valores entre duas variáveis.
 
         do
         {
-            maior -= menor; //ERRADO!
-            
+            if (menor > maior)
+            {
+                temp = maior;
+                maior = menor;
+                menor = temp;
+            }
 
+            maior = maior - menor;            
         }while(menor > 0);
 
         return maior;
