@@ -7,19 +7,17 @@ public class Main {
 
         for(int i = 0; i < T; i++)
         {
+            int resultadoFinal = 0;
+
             long D = scan.nextInt();
             int I = scan.nextInt();
             int B = scan.nextInt();
-            
-            scan.next();
 
             Integer[] ingPrecos = new Integer[I];
             for (int j = 0; j < I; j++)
             {
                 ingPrecos[j] = scan.nextInt();
             }
-
-            scan.next();
 
             Integer[] bolosDesc = new Integer[B];
             for (int k = 0; k < I; k++)
@@ -29,7 +27,7 @@ public class Main {
                 {
                     int ingIndex = scan.nextInt();
                     int ingQtd = scan.nextInt();
-                    algumaCoisaAindaNaoCriada();
+                    System.out.println("OK");
                 }
             }
         }
