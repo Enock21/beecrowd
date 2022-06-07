@@ -7,7 +7,7 @@ public class Main {
 
         for(int i = 0; i < T; i++)
         {
-            int resultadoFinal = 0;
+            int resultadoFinal = 1;
 
             long D = scan.nextInt();
             int I = scan.nextInt();
@@ -27,7 +27,8 @@ public class Main {
                 {
                     int ingIndex = scan.nextInt();
                     int ingQtd = scan.nextInt();
-                    System.out.println("OK");
+                    //Funcao a ser implementada
+                    
                 }
             }
         }
