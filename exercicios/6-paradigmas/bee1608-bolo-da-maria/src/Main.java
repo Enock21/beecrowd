@@ -19,16 +19,16 @@ public class Main {
                 ingPrecos[j] = scan.nextInt();
             }
 
-            Integer[] bolosDesc = new Integer[B];
+            Integer[] bolosPrecoUni = new Integer[B];
             for (int k = 0; k < I; k++)
             {
+                bolosPrecoUni[k] = 0;
                 int ingDif = scan.nextInt();
                 for (int l = 0; l < ingDif; l++)
                 {
                     int ingIndex = scan.nextInt();
                     int ingQtd = scan.nextInt();
-                    //Funcao a ser implementada
-                    
+                    bolosPrecoUni[k] += (ingQtd * ingPrecos[ingIndex]);
                 }
             }
         }
