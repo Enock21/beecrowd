@@ -7,8 +7,6 @@ public class Main {
 
         for(int i = 0; i < T; i++)
         {
-            int resultadoFinal = 1;
-
             long D = scan.nextInt();
             int I = scan.nextInt();
             int B = scan.nextInt();
@@ -31,6 +29,33 @@ public class Main {
                     bolosPrecoUni[k] += (ingQtd * ingPrecos[ingIndex]);
                 }
             }
+
+            int maxBolo = calculaMaxBolo(bolosPrecoUni, D);
+            System.out.println(maxBolo);
         }
+    }
+
+    public static int calculaMaxBolo(Integer[] bolosPrecoUni, long dinheiro)
+    {
+        int maxBolo = 0;
+        Integer[] maximos = new Integer[bolosPrecoUni.length];
+
+        for (int i = 0; i < bolosPrecoUni.length; i++)
+        {
+            int multiBolos = 0;
+            while(true)
+            {
+                multiBolos += bolosPrecoUni[i];
+                if (multiBolos > dinheiro) { break; }
+                else if (multiBolos > maximos[i]){ maximos[i] = multiBolos; }
+            }
+        }
+
+        for (int k = 0; k < maximos.length; k++)
+        {
+            if (maximos[k] > maxBolo) { maxBolo = maximos[k]; }
+        }
+
+        return maxBolo;
     }
 }
