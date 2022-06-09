@@ -32,28 +32,32 @@ public class Main {
 
             int maxBolo = calculaMaxBolo(bolosPrecoUni, D);
             System.out.println(maxBolo);
+
+            scan.close();
         }
     }
 
     public static int calculaMaxBolo(Integer[] bolosPrecoUni, long dinheiro)
     {
         int maxBolo = 0;
-        Integer[] maximos = new Integer[bolosPrecoUni.length];
+        Integer[] maximosBolos = new Integer[bolosPrecoUni.length];
 
         for (int i = 0; i < bolosPrecoUni.length; i++)
         {
+            maximosBolos[i] = 0;
             int multiBolos = 0;
             while(true)
             {
                 multiBolos += bolosPrecoUni[i];
                 if (multiBolos > dinheiro) { break; }
-                else if (multiBolos > maximos[i]){ maximos[i] = multiBolos; }
+                maximosBolos[i]++;
+            
             }
         }
 
-        for (int k = 0; k < maximos.length; k++)
+        for (int k = 0; k < maximosBolos.length; k++)
         {
-            if (maximos[k] > maxBolo) { maxBolo = maximos[k]; }
+            if (maximosBolos[k] > maxBolo) { maxBolo = maximosBolos[k]; }
         }
 
         return maxBolo;
