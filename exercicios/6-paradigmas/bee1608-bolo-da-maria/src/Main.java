@@ -1,3 +1,13 @@
+/*
+Exemplo de entrada a ser testado:
+10 4 3
+10 10 10 10
+3 0 1 1 1 2 1
+2 0 1 1 1
+1 3 1
+
+*/
+
 import java.util.Scanner;
 
 public class Main {
