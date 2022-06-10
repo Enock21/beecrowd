@@ -1,13 +1,3 @@
-/*
-Exemplo de entrada a ser testada:
-10 4 3
-10 10 10 10
-3 0 1 1 1 2 1
-2 0 1 1 1
-1 3 1
-
-*/
-
 import java.util.Scanner;
 
 public class Main {
@@ -43,8 +33,9 @@ public class Main {
             int maxBolo = calculaMaxBolo(bolosPrecoUni, D);
             System.out.println(maxBolo);
 
-            scan.close();
         }
+        
+        scan.close();
     }
 
     public static int calculaMaxBolo(Integer[] bolosPrecoUni, long dinheiro)
