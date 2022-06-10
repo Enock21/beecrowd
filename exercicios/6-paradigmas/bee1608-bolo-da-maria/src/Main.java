@@ -1,5 +1,5 @@
 /*
-Exemplo de entrada a ser testado:
+Exemplo de entrada a ser testada:
 10 4 3
 10 10 10 10
 3 0 1 1 1 2 1
@@ -28,7 +28,7 @@ public class Main {
             }
 
             Integer[] bolosPrecoUni = new Integer[B];
-            for (int k = 0; k < I; k++)
+            for (int k = 0; k < B; k++)
             {
                 bolosPrecoUni[k] = 0;
                 int ingDif = scan.nextInt();
